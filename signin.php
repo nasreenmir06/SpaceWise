@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'db.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -9,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) {
+        $_SESSION['username'] = $username;
         header('Location: dashboard.php');
         exit();
     } else {
