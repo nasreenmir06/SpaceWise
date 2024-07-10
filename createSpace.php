@@ -12,8 +12,8 @@
         <div class="form-row">
             <h2>Name your Space!</h2>
             <input type="text" placeholder="What is the name of this space?">
-            <button type="submit">Set Space name</button>
             <span id="spaceNameSubtext">Ex. Queen's University</span>
+            <button type="submit">Set Space name</button>
         </div>
         <div class="form-row">
             <h2>Buildings</h2>
