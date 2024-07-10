@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    margin-top: 50px;
+    padding: 0 10px; /* Ensure body padding */
+}
+
+.form-container {
+    padding: 0 10px; /* Padding to ensure consistent spacing from the side of the screen */
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column; /* Ensure each row stacks vertically */
+    margin-bottom: 10px; /* Space between form rows */
+}
+
+.form-row h2,
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row button,
+.form-row span {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.form-row input[type="text"], .form-row input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    width: 300px; 
+    box-sizing: border-box;
+}
+
+.form-row button {
+    padding: 10px 20px;
+    font-size: 16px;
+    align-self: flex-start; /* Align button to the left */
+}
+
+#spaceNameSubtext {
+    display: block; 
+    font-size: 12px; 
+    text-align: left;
+    color: red;
+}
+
+label {
+    font-size: 18px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    text-align: left;
+}
+
+
+
