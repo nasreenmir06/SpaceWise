@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['rooms']) && isset($_PO
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Rooms</title>
-    <link rel="stylesheet" href="style.css?v=0.1">
+    <link rel="stylesheet" href="style.css?v=0.0">
 </head>
 <body>
     <h1>Add Rooms</h1>
@@ -58,5 +58,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['rooms']) && isset($_PO
             <button type="submit">Add Room</button>
         </div>
     </form>
+    <button onclick="window.location.href='dashboard.php'" type="submit">Finish Creating Space!</button>
 </body>
 </html>
