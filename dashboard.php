@@ -8,7 +8,6 @@
 </head>
 <body>
     <h1>Dashboard</h1>
-    <!-- Change "My Spaces" button to say the name of the user-created space -->
     <button onclick="window.location.href='mySpaces.php'" id="spaces">My Spaces</button>
     <button onclick="window.location.href='setEnvironment.php'" id="setEnivironment">Create a Space</button>
 </body>
