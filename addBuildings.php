@@ -14,7 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['building_name'])) {
     $insertBuildingSQL = "INSERT INTO `$space_name` (buildings) VALUES ('$building_name')";
 
     if ($conn->query($insertBuildingSQL) === TRUE) {
-        echo "<script>alert('Building added: " . $building_name . "');</script>";
+        $createBuildingTableSQL = "CREATE TABLE `{$space_name}_{$building_name}` (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            rooms VARCHAR(255) NOT NULL
+        )";
+
+        if ($conn->query($createBuildingTableSQL) === TRUE) {
+            echo "<script>alert('Building added and table created: " . $building_name . "');</script>";
+        } else {
+            echo "<script>alert('Error creating building table: " . $conn->error . "');</script>";
+        }
     } else {
         echo "<script>alert('Error adding building: " . $conn->error . "');</script>";
     }
@@ -36,10 +45,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['building_name'])) {
             <h2>Buildings</h2>
             <input type="text" name="building_name" placeholder="Enter building name" required>
             <button type="submit">Add building</button>
+            <button onclick="window.location.href='addRooms.php'" type="submit">Next</button>
         </div>
-    </form>
-    <form action="rooms.php" method="get">
-        <button type="submit">Next</button>
     </form>
 </body>
 </html>
