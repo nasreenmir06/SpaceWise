@@ -1,16 +1,18 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'db.php';
 
 $username = $_SESSION['username'];
 
-$query = "SELECT environment_name FROM login_info WHERE username = '$username'";
+$query = "SELECT environment_Name FROM login_info WHERE username = '$username'";
 $result = $conn->query($query);
 
-$environment_name = null;
+$environmentName = null;
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $environment_name = $row['environment_name'];
+    $environmentName = $row['environment_Name'];
 }
 
 $conn->close();
@@ -22,29 +24,30 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css?v=0.1">
+    <link rel="stylesheet" href="../css/style.css?v=0.1">
 </head>
 <body>
     <h1>Dashboard</h1>
-    <?php if (is_null($environment_name) || $environment_name === "NULL") : ?>
+    <?php if (is_null($environmentName) || $environmentName === "NULL") : ?>
         <h3>You have no spaces</h3>
         <button onclick="window.location.href='setEnvironment.php'" id="setEnivironment">Create a Space</button>
     <?php else : ?>
         <form id="search-form" method="GET">
             <input type="text" name="query" placeholder="Search..">
-            <select name="search_type" id="search_type" required>
+            <select name="searchType" id="searchType" required>
                 <option value="" disabled selected>What are you searching for?</option>
                 <option value="event">Event</option>
                 <option value="room">Room</option>
                 <option value="building">Building</option>
             </select>
         </form>
+        <button onclick="window.location.href='addEvent.php'">Add Event</button>
         <button>Edit Space Setup</button>
-        <h3>Upcoming events in <?php echo htmlspecialchars($environment_name); ?></h3>
+        <h3>Upcoming events in <?php echo htmlspecialchars($environmentName); ?></h3>
     <?php endif; ?>
     <script>
         document.getElementById('search-form').addEventListener('submit', function(event) {
-            const searchType = document.getElementById('search_type').value;
+            const searchType = document.getElementById('searchType').value;
             if (searchType === '') {
                 event.preventDefault();
                 alert('Please select what you are searching for.');
