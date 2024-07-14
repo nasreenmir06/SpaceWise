@@ -30,9 +30,9 @@ $conn->close();
         <h3>You have no spaces</h3>
         <button onclick="window.location.href='setEnvironment.php'" id="setEnivironment">Create a Space</button>
     <?php else : ?>
-        <form id="search-form" action="buildingSearch.php" method="GET">
-            <input type="text" placeholder="Search..">
-            <select name="building_name" required>
+        <form id="search-form" method="GET">
+            <input type="text" name="query" placeholder="Search..">
+            <select name="search_type" id="search_type" required>
                 <option value="" disabled selected>What are you searching for?</option>
                 <option value="event">Event</option>
                 <option value="room">Room</option>
@@ -44,7 +44,7 @@ $conn->close();
     <?php endif; ?>
     <script>
         document.getElementById('search-form').addEventListener('submit', function(event) {
-            const searchType = document.querySelector('select[name="search_type"]').value;
+            const searchType = document.getElementById('search_type').value;
             if (searchType === '') {
                 event.preventDefault();
                 alert('Please select what you are searching for.');
