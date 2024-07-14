@@ -22,7 +22,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="style.css?v=0.0">
+    <link rel="stylesheet" href="style.css?v=0.1">
 </head>
 <body>
     <h1>Dashboard</h1>
@@ -30,7 +30,7 @@ $conn->close();
         <h3>You have no spaces</h3>
         <button onclick="window.location.href='setEnvironment.php'" id="setEnivironment">Create a Space</button>
     <?php else : ?>
-        <div id="search">
+        <form id="search-form" action="buildingSearch.php" method="GET">
             <input type="text" placeholder="Search..">
             <select name="building_name" required>
                 <option value="" disabled selected>What are you searching for?</option>
@@ -38,9 +38,25 @@ $conn->close();
                 <option value="room">Room</option>
                 <option value="building">Building</option>
             </select>
-        </div>
+        </form>
         <button>Edit Space Setup</button>
-        <h3>Your space: <?php echo htmlspecialchars($environment_name); ?></h3>
+        <h3>Upcoming events in <?php echo htmlspecialchars($environment_name); ?></h3>
     <?php endif; ?>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            const searchType = document.querySelector('select[name="search_type"]').value;
+            if (searchType === '') {
+                event.preventDefault();
+                alert('Please select what you are searching for.');
+            }
+            else if (searchType === 'building') {
+                event.target.action = 'buildingSearch.php';
+            } else if (searchType === 'room') {
+                event.target.action = 'roomSearch.php';
+            } else if (searchType === 'event') {
+                event.target.action = 'eventSearch.php';
+            }
+        });
+    </script>
 </body>
 </html>
