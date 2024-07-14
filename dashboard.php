@@ -30,7 +30,16 @@ $conn->close();
         <h3>You have no spaces</h3>
         <button onclick="window.location.href='setEnvironment.php'" id="setEnivironment">Create a Space</button>
     <?php else : ?>
-        <input type="text" placeholder="Search..">
+        <div id="search">
+            <input type="text" placeholder="Search..">
+            <select name="building_name" required>
+                <option value="" disabled selected>What are you searching for?</option>
+                <option value="event">Event</option>
+                <option value="room">Room</option>
+                <option value="building">Building</option>
+            </select>
+        </div>
+        <button>Edit Space Setup</button>
         <h3>Your space: <?php echo htmlspecialchars($environment_name); ?></h3>
     <?php endif; ?>
 </body>
