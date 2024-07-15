@@ -8,6 +8,7 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['space_name'])) {
 }
 
 $space_name = $_SESSION['space_name'];
+$username = $_SESSION['username'];
 $buildings = [];
 
 $fetchBuildingsSQL = "SELECT buildings FROM `$space_name`";

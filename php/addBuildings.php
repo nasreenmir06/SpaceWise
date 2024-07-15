@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'db.php';
 
 if (!isset($_SESSION['username']) || !isset($_SESSION['space_name'])) {
@@ -10,11 +12,12 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['space_name'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['building_name'])) {
     $building_name = $conn->real_escape_string($_POST['building_name']);
     $space_name = $_SESSION['space_name'];
+    $username = $_SESSION['username'];
 
-    $insertBuildingSQL = "INSERT INTO `$space_name` (buildings) VALUES ('$building_name')";
+    $insertBuildingSQL = "INSERT INTO `${username}_${space_name}` (buildings) VALUES ('$building_name')";
 
     if ($conn->query($insertBuildingSQL) === TRUE) {
-        $createBuildingTableSQL = "CREATE TABLE `{$space_name}_{$building_name}` (
+        $createBuildingTableSQL = "CREATE TABLE `{$username}_{$space_name}_{$building_name}` (
             id INT AUTO_INCREMENT PRIMARY KEY,
             rooms VARCHAR(255) NOT NULL
         )";

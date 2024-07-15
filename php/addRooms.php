@@ -8,9 +8,10 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['space_name'])) {
 }
 
 $space_name = $_SESSION['space_name'];
+$username = $_SESSION['username'];
 $buildings = [];
 
-$fetchBuildingsSQL = "SELECT buildings FROM `$space_name`";
+$fetchBuildingsSQL = "SELECT buildings FROM `${username}_${space_name}`";
 $result = $conn->query($fetchBuildingsSQL);
 
 if ($result->num_rows > 0) {
@@ -22,7 +23,7 @@ if ($result->num_rows > 0) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['rooms']) && isset($_POST['building_name'])) {
     $rooms = $conn->real_escape_string($_POST['rooms']);
     $building_name = $conn->real_escape_string($_POST['building_name']);
-    $building_table = "{$space_name}_{$building_name}";
+    $building_table = "${username}_{$space_name}_{$building_name}";
 
     $insertRoomSQL = "INSERT INTO `$building_table` (rooms) VALUES ('$rooms')";
 

@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['space_name'])) {
     $username = $_SESSION['username'];
     $sql = "UPDATE login_info SET environment_name='$space_name' WHERE username='$username'";
     if ($conn->query($sql) === TRUE) {
-        $createTableSQL = "CREATE TABLE `$space_name` (
+        $createTableSQL = "CREATE TABLE `${username}_${space_name}` (
             id INT AUTO_INCREMENT PRIMARY KEY,
             buildings VARCHAR(255) NOT NULL
         )";
