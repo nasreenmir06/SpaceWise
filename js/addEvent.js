@@ -4,11 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     populateDropdown('startMin', 0, 59);
     populateDropdown('endMin', 0, 59);
 
-    const selectElement = document.getElementById('buildingSelect');
+    const buildingSelectElement = document.getElementById('buildingSelect');
     const roomSelectElement = document.getElementById('roomSelect');
     const selectRoomDiv = document.getElementById('selectRoom');
+    const setEventNameDiv = document.getElementById('setEventName');
+    const createEventDiv = document.getElementById('createEvent');
 
-    selectElement.addEventListener('change', function(event) {
+    buildingSelectElement.addEventListener('change', function(event) {
         const selectedValue = event.target.value;
         if (selectedValue) {
             fetchRooms(selectedValue);
@@ -33,6 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 roomSelectElement.appendChild(option);
             });
             selectRoomDiv.style.display = 'block';
+            setEventNameDiv.style.display = 'block';
+            createEventDiv.style.display = 'block';
+
         })
         .catch(error => console.error('Error fetching rooms:', error));
     }

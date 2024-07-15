@@ -1,5 +1,7 @@
 <?php
 session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include 'db.php';
 
 if (!isset($_SESSION['username']) || !isset($_SESSION['space_name'])) {
@@ -11,7 +13,7 @@ $space_name = $_SESSION['space_name'];
 $username = $_SESSION['username'];
 $buildings = [];
 
-$fetchBuildingsSQL = "SELECT buildings FROM `$space_name`";
+$fetchBuildingsSQL = "SELECT buildings FROM `${username}_${space_name}`";
 $result = $conn->query($fetchBuildingsSQL);
 
 if ($result->num_rows > 0) {
@@ -22,7 +24,7 @@ if ($result->num_rows > 0) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
     $building_name = $conn->real_escape_string($_POST['building_name']);
-    $building_table = "{$space_name}_{$building_name}";
+    $building_table = "${username}_{$space_name}_{$building_name}";
     $rooms = [];
 
     $fetchRoomsSQL = "SELECT rooms FROM `$building_table`";
@@ -45,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Event</title>
-    <link rel="stylesheet" href="../css/style.css?v=0.1">
+    <link rel="stylesheet" href="../css/style.css?v=0.0">
 </head>
 <body>
     <h1>Add Event</h1>
@@ -95,6 +97,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
             <option value="" disabled selected>Select Room</option>
         </select>
     </div>  
+
+    <div id="setEventName" style="display:none;">
+        <h3>Set Event Name</h3>
+        <input type="text" id="eventName" placeholder="Enter event name">
+    </div>
+
+    <div id="createEvent" style="display:none;">
+        <button type="submit">Create Event!</button>
+    </div>
     <script src="../js/addEvent.js"></script>
 </body>
 </html>
