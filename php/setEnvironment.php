@@ -21,7 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['space_name'])) {
 
         if ($conn->query($createTableSQL) === TRUE) {
             header('Location: addBuildings.php');
-            exit();
         } else {
             echo "<script>alert('Error creating environment table: " . $conn->error . "');</script>";
         }
@@ -41,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['space_name'])) {
             header('Location: addBuildings.php');
             exit();
         } else {
-            echo "<script>alert('Error creating environment table: " . $conn->error . "');</script>";
+            echo "<script>alert('Error creating events table');</script>";
         }
     } else {
         echo "<script>alert('Error updating environment name: " . $conn->error . "');</script>";
