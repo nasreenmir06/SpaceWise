@@ -51,6 +51,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
 </head>
 <body>
     <h1>Add Event</h1>
+    <p>If this event is a one day event, your start date and end date should be the same.</p>
+    <div id="startDate">
+        <h3>Select Start Date</h3>
+        <input type="date" id="startDate" name="startDate" />
+    </div>
+
+    <div id="endDate">
+        <h3>Select End Date</h3>
+        <input type="date" id="startDate" name="startDate" />
+    </div>
+
     <div id="startTime">
         <h3>Select Start Time</h3>
         <select name="startHour" id="startHour" required>

@@ -25,6 +25,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['space_name'])) {
         } else {
             echo "<script>alert('Error creating environment table: " . $conn->error . "');</script>";
         }
+
+        $createTableSQL = "CREATE TABLE `${username}_events` (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            eventName VARCHAR(255) NOT NULL,
+            building VARCHAR(255) NOT NULL,
+            room VARCHAR(255) NOT NULL,
+            startDate VARCHAR(255) NOT NULL,
+            endDate VARCHAR(255) NOT NULL,
+            startTime VARCHAR(255) NOT NULL,
+            endTime VARCHAR(255) NOT NULL
+        )";
+
+        if ($conn->query($createTableSQL) === TRUE) {
+            header('Location: addBuildings.php');
+            exit();
+        } else {
+            echo "<script>alert('Error creating environment table: " . $conn->error . "');</script>";
+        }
     } else {
         echo "<script>alert('Error updating environment name: " . $conn->error . "');</script>";
     }

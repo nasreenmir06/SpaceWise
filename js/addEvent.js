@@ -4,6 +4,20 @@ document.addEventListener('DOMContentLoaded', function() {
     populateDropdown('startMin', 0, 59);
     populateDropdown('endMin', 0, 59);
 
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+    const formattedDate = `${year}-${month}-${day}`;
+
+    const startDateInput = document.getElementById('startDate');
+    startDateInput.setAttribute('min', formattedDate);
+    startDateInput.setAttribute('value', formattedDate);
+
+    const endDateInput = document.getElementById('endDate');
+    endDateInput.setAttribute('min', formattedDate);
+    endDateInput.setAttribute('value', formattedDate);
+
     const buildingSelectElement = document.getElementById('buildingSelect');
     const roomSelectElement = document.getElementById('roomSelect');
     const selectRoomDiv = document.getElementById('selectRoom');
