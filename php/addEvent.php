@@ -146,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <div id="createEvent" style="display:none;">
-        <button type="submit" id="createEventButton">Create Event!</button>
+        <button onclick="window.location.href='addEvent.php'" type="submit" id="createEventButton">Create Event!</button>
     </div>
     <script src="../js/addEvent.js"></script>
 </body>
