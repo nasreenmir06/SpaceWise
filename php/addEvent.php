@@ -39,6 +39,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
     echo json_encode($rooms);
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    if ($data) {
+        $eventName = $conn->real_escape_string($data['eventName']);
+        $building = $conn->real_escape_string($data['building']);
+        $room = $conn->real_escape_string($data['room']);
+        $startDate = $conn->real_escape_string($data['startDate']);
+        $endDate = $conn->real_escape_string($data['endDate']);
+        $startHour = $conn->real_escape_string($data['startHour']);
+        $startMin = $conn->real_escape_string($data['startMin']);
+        $startMeridiem = $conn->real_escape_string($data['startMeridiem']);
+        $endHour = $conn->real_escape_string($data['endHour']);
+        $endMin = $conn->real_escape_string($data['endMin']);
+        $endMeridiem = $conn->real_escape_string($data['endMeridiem']);
+
+        $sql = "INSERT INTO `${username}_events` (eventName, building, room, startDate, endDate, startTime, endTime)
+                VALUES ('$eventName', '$building', '$room', '$startDate', '$endDate', 
+                        '$startHour:$startMin $startMeridiem', '$endHour:$endMin $endMeridiem')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $conn->error]);
+        }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Invalid input']);
+    }
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -115,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
     </div>
 
     <div id="createEvent" style="display:none;">
-        <button type="submit">Create Event!</button>
+        <button type="submit" id="createEventButton">Create Event!</button>
     </div>
     <script src="../js/addEvent.js"></script>
 </body>
