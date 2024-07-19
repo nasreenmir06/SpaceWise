@@ -55,6 +55,47 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .catch(error => console.error('Error fetching rooms:', error));
     }
+
+    document.getElementById('createEventButton').addEventListener('click', function() {
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        const startHour = document.getElementById('startHour').value;
+        const startMin = document.getElementById('startMin').value;
+        const startMeridiem = document.getElementById('startMeridiem').value;
+        const endHour = document.getElementById('endHour').value;
+        const endMin = document.getElementById('endMin').value;
+        const endMeridiem = document.getElementById('endMeridiem').value;
+        const building = document.getElementById('buildingSelect').value;
+        const room = document.getElementById('roomSelect').value;
+        const eventName = document.getElementById('eventName').value;
+
+        const eventData = {
+            startDate,
+            endDate,
+            startHour,
+            startMin,
+            startMeridiem,
+            endHour,
+            endMin,
+            endMeridiem,
+            building,
+            room,
+            eventName
+        };
+
+        fetch('addEvent.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(eventData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch(error => console.error('Error:', error));
+    });
 });
 
 function populateDropdown(elementId, start, end) {
