@@ -33,13 +33,14 @@ $conn->close();
         <button onclick="window.location.href='setEnvironment.php'" id="setEnivironment">Create a Space</button>
     <?php else : ?>
         <form id="search-form" method="GET">
-            <input type="text" name="query" placeholder="Search..">
+            <input id="searchBox" type="text" name="query" placeholder="Search..">
             <select name="searchType" id="searchType" required>
                 <option value="" disabled selected>What are you searching for?</option>
                 <option value="event">Event</option>
                 <option value="room">Room</option>
                 <option value="building">Building</option>
             </select>
+            <button type="submit">Search</button>
         </form>
         <button onclick="window.location.href='addEvent.php'">Add Event</button>
         <button>Edit Space Setup</button>
@@ -48,6 +49,7 @@ $conn->close();
     <script>
         document.getElementById('search-form').addEventListener('submit', function(event) {
             const searchType = document.getElementById('searchType').value;
+            const query = document.getElementById('searchBox').value;
             if (searchType === '') {
                 event.preventDefault();
                 alert('Please select what you are searching for.');

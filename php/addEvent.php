@@ -81,14 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h1>Add Event</h1>
     <p>If this event is a one day event, your start date and end date should be the same.</p>
-    <div id="startDate">
+    <div id="startDateDiv">
         <h3>Select Start Date</h3>
         <input type="date" id="startDate" name="startDate" />
     </div>
 
-    <div id="endDate">
+    <div id="endDateDiv">
         <h3>Select End Date</h3>
-        <input type="date" id="startDate" name="startDate" />
+        <input type="date" id="endDate" name="endDate" />
     </div>
 
     <div id="startTime">
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
         <select name="startMin" id="startMin" required>
             <option value="" disabled selected>Minute</option>
-        </select>
+        </select> 
         <select name="startMeridiem" id="startMeridiem" required>
             <option value="" disabled selected>AM/PM</option>
             <option value="am">AM</option>
