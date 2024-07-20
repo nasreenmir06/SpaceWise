@@ -4,13 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include 'db.php';
 
-if (isset($_GET['query'])) {
-    $username = $_SESSION['username'];
-    $tableName = "{$username}_events";
-
-    $sql = "SELECT * FROM $tableName";
-    $result = $conn->query($sql);
-}
+$username = $_SESSION['username'];
+$tableName = "{$username}_events";
+$sql = "SELECT * FROM $tableName";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
