@@ -7,9 +7,9 @@ include 'db.php';
 if (isset($_GET['query'])) {
     $searchQuery = $_GET['query'];
     $username = $_SESSION['username'];
-    $tableName = "{$username}_event";
+    $tableName = "{$username}_events";
     
-    $stmt = $conn->prepare("SELECT * FROM `${username}_events` WHERE building LIKE ?");
+    $stmt = $conn->prepare("SELECT * FROM $tableName WHERE building LIKE ?");
     $likeQuery = "%$searchQuery%";
     $stmt->bind_param("s", $likeQuery);
     $stmt->execute();

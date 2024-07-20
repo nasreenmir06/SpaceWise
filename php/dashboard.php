@@ -40,8 +40,11 @@ $conn->close();
             </select>
             <button type="submit">Search</button>
         </form>
-        <button onclick="window.location.href='addEvent.php'">Add Event</button>
-        <button>Edit Space Setup</button>
+        <div id="buttonOptions">
+            <button onclick="window.location.href='addEvent.php'">Add Event</button>
+            <button onclick="window.location.href='allEvents.php'">All Events</button>
+            <button>Edit Space Setup</button>
+        </div>
         <h3>Upcoming events in <?php echo htmlspecialchars($environmentName); ?></h3>
     <?php endif; ?>
     <script>

@@ -5,15 +5,11 @@ ini_set('display_errors', 1);
 include 'db.php';
 
 if (isset($_GET['query'])) {
-    $searchQuery = $_GET['query'];
     $username = $_SESSION['username'];
     $tableName = "{$username}_events";
-    
-    $stmt = $conn->prepare("SELECT * FROM $tableName WHERE room LIKE ?");
-    $likeQuery = "%$searchQuery%";
-    $stmt->bind_param("s", $likeQuery);
-    $stmt->execute();
-    $result = $stmt->get_result();
+
+    $sql = "SELECT * FROM $tableName";
+    $result = $conn->query($sql);
 }
 ?>
 
@@ -22,15 +18,16 @@ if (isset($_GET['query'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Search Results</title>
+    <title>All Events</title>
     <link rel="stylesheet" href="../css/style.css?v=0.1">
 </head>
 <body>
-    <h1>Room Search Results</h1>
+    <h1>All Events</h1>
     <?php if (isset($result) && $result->num_rows > 0): ?>
         <table>
             <tr>
                 <th>Event Name</th>
+                <th>Building</th>
                 <th>Room</th>
                 <th>Start Date</th>
                 <th>End Date</th>
@@ -40,6 +37,7 @@ if (isset($_GET['query'])) {
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['eventName']); ?></td>
+                    <td><?php echo htmlspecialchars($row['building']); ?></td>
                     <td><?php echo htmlspecialchars($row['room']); ?></td>
                     <td><?php echo htmlspecialchars($row['startDate']); ?></td>
                     <td><?php echo htmlspecialchars($row['endDate']); ?></td>
@@ -49,7 +47,7 @@ if (isset($_GET['query'])) {
             <?php endwhile; ?>
         </table>
     <?php else: ?>
-        <p>No results found for '<?php echo htmlspecialchars($searchQuery); ?>'</p>
+        <p>You have no events</p>
     <?php endif; ?>
     <button onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
 </body>
