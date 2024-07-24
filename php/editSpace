@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Space</title>
+    <link rel="stylesheet" href="../css/style.css?v=0.1">
+</head>
+<body>
+    <h1>Edit Space</h1>
+    </div id="editSpaceOptions">
+        <select id="AddOrRemove">
+            <option value="" disabled selected>Would you like to add or remove a room/building?</option>
+            <option value="add">Add</option>
+            <option value="remove">Remove</option>
+        </select>
+        <select id="BuildingOrRoom">
+            <option value="" disabled selected>Would you like to add or remove a room/building?</option>
+            <option value="building">Building</option>
+            <option value="room">Room</option>
+        </select>
+    </div>
+</body>
+</html>
+
+<!-- Add a room/building -->
+<!-- Remove a room/building -->
+<!-- Room/Building dropdown -->
+
+<!-- Add a room -->
+<!-- building dropdown, room name -->
+
+<!-- Add a building -->
+<!-- building name -->
+
+
+<!-- Remove a room -->
+<!-- building dropdown, room name -->
+
+
+<!-- Remove a building -->
+<!-- building name -->
+
+<!-- Submit -->
