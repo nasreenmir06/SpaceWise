@@ -69,6 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const room = document.getElementById('roomSelect').value;
         const eventName = document.getElementById('eventName').value;
 
+        console.log(startDate);
+
         const eventData = {
             startDate,
             endDate,

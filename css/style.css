@@ -49,13 +49,6 @@ button {
     align-self: flex-start;
 }
 
-#spaceNameSubtext {
-    display: block; 
-    font-size: 12px; 
-    text-align: left;
-    margin-top: 0px;
-}
-
 label {
     font-size: 18px;
 }
@@ -68,6 +61,29 @@ h2 {
     text-align: left;
 }
 
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+#spaceNameSubtext {
+    display: block; 
+    font-size: 12px; 
+    text-align: left;
+    margin-top: 0px;
+}
+
 #search-form {
     margin-bottom: 10px;
 }
@@ -75,6 +91,27 @@ h2 {
 #createEvent {
     margin-top: 10px;
 }
+
+table {
+    margin-bottom: 15px;
+}
+
+#buttonOptions button {
+    display: block;
+    margin-bottom: 10px;
+    width: 20%;
+}
+
+body #editSpaceElems > div,
+body #editSpaceElems > select,
+body #editSpaceElems > input {
+    display: flex;
+    margin-bottom: 20px; /* Adjust this value as needed */
+    gap: 10px; /* This will add space between the child items */
+    margin-top: 20px; /* Adjust this value as needed */
+    gap: 10px;
+}
+
 
 
 
