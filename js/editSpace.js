@@ -121,6 +121,10 @@ document.addEventListener('DOMContentLoaded', function() {
         formData.append('building_name', buildingName);
         formData.append('room_name', roomName);
 
+        for (let entry of formData) {
+            console.log(`Field: ${entry[0]}, Value: ${entry[1]}`);
+          }
+          
         fetch('editSpace.php', {
             method: 'POST',
             body: formData

@@ -41,24 +41,76 @@ function fetchRooms($username, $space_name, $building_name, $conn) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['BuildingOrRoom'])) {
+    if (isset($_POST['AddOrRemove']) && isset($_POST['BuildingOrRoom'])) {
+        echo "Received POST data:\n";
+
+        $addOrRemove = $_POST['AddOrRemove'];
+        $buildingOrRoom = $_POST['BuildingOrRoom'];
+        $building_name = isset($_POST['building_name']) ? $_POST['building_name'] : '';
+        $room_name = isset($_POST['room_name']) ? $_POST['room_name'] : '';
+        
+        if ($addOrRemove === "add" && $buildingOrRoom === "building") {
+            $createBuildingTableSQL = "CREATE TABLE `{$username}_{$space_name}_{$building_name}` (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                rooms VARCHAR(255) NOT NULL
+            )";
+    
+            if ($conn->query($createBuildingTableSQL) === TRUE) {
+                echo "<script>alert('Building added and table created: " . $building_name . "');</script>";
+            } else {
+                echo "<script>alert('Error creating building table: " . $conn->error . "');</script>";
+            }
+
+            $sql = "INSERT INTO `{$username}_{$space_name}` (buildings)
+                VALUES ('$building_name')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => $conn->error]);
+            }
+        } elseif ($addOrRemove === "add" && $buildingOrRoom === "room") {
+            $sql = "INSERT INTO `{$username}_{$space_name}_{$building_name}` (rooms)
+                VALUES ('$room_name')";
+
+            if ($conn->query($sql) === TRUE) {
+                echo json_encode(['status' => 'success']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => $conn->error]);
+            }
+        } elseif ($addOrRemove === "remove" && $buildingOrRoom === "building") {
+            $tableName = "{$username}_{$space_name}_{$building_name}";
+            $sql = "DROP TABLE IF EXISTS `{$tableName}`";
+
+            if ($conn->query($sql) === TRUE) {
+                echo "Table deleted successfully";
+            } else {
+                echo "Error deleting table: " . $conn->error;
+            }
+
+            $sql = "DELETE FROM `{$username}_{$space_name}` WHERE `buildings` = '$building_name'";
+    
+            if ($conn->query($sql) === TRUE) {
+                echo "Building deleted successfully";
+            } else {
+                echo "Error deleting building: " . $conn->error;
+            }            
+        } elseif ($addOrRemove === "remove" && $buildingOrRoom === "room") {
+            $sql = "DELETE FROM `{$username}_{$space_name}_{$building_name}` WHERE `rooms` = '$room_name'";
+    
+            if ($conn->query($sql) === TRUE) {
+                echo "Room deleted successfully";
+            } else {
+                echo "Error deleting room: " . $conn->error;
+            }         
+        }
+    } elseif (isset($_POST['BuildingOrRoom'])) {
         $buildingOrRoom = $_POST['BuildingOrRoom'];
         if ($buildingOrRoom === 'building') {
             fetchBuildings($username, $space_name, $conn);
         } elseif ($buildingOrRoom === 'room' && isset($_POST['building_name'])) { 
             $building_name = $_POST['building_name']; 
             fetchRooms($username, $space_name, $building_name, $conn);
-        }
-    } else {
-        if (isset($_POST['AddOrRemove']) && isset($_POST['BuildingOrRoom'])) {
-            $addOrRemove = $_POST['AddOrRemove'];
-            $buildingOrRoom = $_POST['BuildingOrRoom'];
-            $building_name = isset($_POST['building_name']) ? $_POST['building_name'] : '';
-            $room_name = isset($_POST['room_name']) ? $_POST['room_name'] : '';
-
-            // For demonstration, send the data back as a response
-            $response = "AddOrRemove: $addOrRemove\nBuildingOrRoom: $buildingOrRoom\nBuilding Name: $building_name\nRoom Name: $room_name";
-            echo nl2br($response);
         }
     }
 }
