@@ -40,11 +40,6 @@ function fetchRooms($username, $space_name, $building_name, $conn) {
     exit();
 }
 
-$addOrRemove = '';
-$buildingOrRoom = '';
-$buildingName = '';
-$roomName = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['BuildingOrRoom'])) {
         $buildingOrRoom = $_POST['BuildingOrRoom'];
@@ -53,6 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif ($buildingOrRoom === 'room' && isset($_POST['building_name'])) { 
             $building_name = $_POST['building_name']; 
             fetchRooms($username, $space_name, $building_name, $conn);
+        }
+    } else {
+        if (isset($_POST['AddOrRemove']) && isset($_POST['BuildingOrRoom'])) {
+            $addOrRemove = $_POST['AddOrRemove'];
+            $buildingOrRoom = $_POST['BuildingOrRoom'];
+            $building_name = isset($_POST['building_name']) ? $_POST['building_name'] : '';
+            $room_name = isset($_POST['room_name']) ? $_POST['room_name'] : '';
+
+            // For demonstration, send the data back as a response
+            $response = "AddOrRemove: $addOrRemove\nBuildingOrRoom: $buildingOrRoom\nBuilding Name: $building_name\nRoom Name: $room_name";
+            echo nl2br($response);
         }
     }
 }
@@ -96,9 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="roomName" placeholder="What is the name of this new room?">
             </div>
         </div>
-        <button type="button">Submit</button>
+        <button type="submit">Submit</button>
     </form>
     <script src="../js/editSpace.js"></script>
 </body>
 </html>
+
 

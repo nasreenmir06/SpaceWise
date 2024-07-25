@@ -92,10 +92,46 @@ document.addEventListener('DOMContentLoaded', function() {
 
     editSpaceForm.addEventListener('submit', function(event) {
         event.preventDefault();
-        // const addOrRemove = AddOrRemove.value;
-        // const buildingOrRoom = BuildingOrRoom.value;
-        // console.log('Add or Remove:', addOrRemove);
-        // console.log('Building or Room:', buildingOrRoom);
-        });
+        const addOrRemove = AddOrRemove.value;
+        const buildingOrRoom = BuildingOrRoom.value;
+        let buildingName = '';
+        let roomName = '';
+
+        if (addOrRemove === 'add' && buildingOrRoom === 'building') {
+            buildingName = document.getElementById('roomName').value;
+        } else if ((addOrRemove === 'add' && buildingOrRoom === 'room') || (addOrRemove === 'remove' && buildingOrRoom === 'room')) {
+            buildingName = document.getElementById('buildingDropdown').value;
+            if (addOrRemove === 'add') {
+                roomName = document.getElementById('roomName').value;
+            } else {
+                roomName = document.getElementById('roomDropdown').value;
+            }
+        } else if (addOrRemove === 'remove' && buildingOrRoom === 'building') {
+            buildingName = document.getElementById('buildingDropdown').value;
+        }
+
+        console.log("add or remove " + addOrRemove);
+        console.log("building or room " + buildingOrRoom);
+        console.log("building name " + buildingName);
+        console.log("room name " + roomName);
+
+        const formData = new FormData();
+        formData.append('AddOrRemove', addOrRemove);
+        formData.append('BuildingOrRoom', buildingOrRoom);
+        formData.append('building_name', buildingName);
+        formData.append('room_name', roomName);
+
+        fetch('editSpace.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            alert(data);
+        })
+        .catch(error => console.error('Error:', error));
+    });
 });
+
 
