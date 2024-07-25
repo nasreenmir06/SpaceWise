@@ -25,10 +25,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const createEventDiv = document.getElementById('createEvent');
 
     buildingSelectElement.addEventListener('change', function(event) {
-        const selectedValue = event.target.value;
-        if (selectedValue) {
-            fetchRooms(selectedValue);
-        }
+        const selectedValue = buildingSelectElement.value;
+        fetchRooms(selectedValue);
     });
 
     function fetchRooms(buildingName) {

@@ -68,6 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     exit();
 }
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>  
 
     <div id="selectRoom" style="display:none;">
-        <h3>Select Building</h3>
+        <h3>Select Room</h3>
         <select name="roomSelect" id="roomSelect" required>
             <option value="" disabled selected>Select Room</option>
         </select>

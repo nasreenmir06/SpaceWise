@@ -15,6 +15,7 @@ if (isset($_GET['query'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 }
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +55,3 @@ if (isset($_GET['query'])) {
     <button onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
 </body>
 </html>
-
-<?php
-$conn->close();
-?>

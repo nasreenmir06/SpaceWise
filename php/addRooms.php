@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['rooms']) && isset($_PO
         echo "<script>alert('Error adding room: " . $conn->error . "');</script>";
     }
 }
+$conn->close();
 ?>
 
 <!DOCTYPE html>

@@ -17,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<script>alert('Invalid login');</script>";
     }
 }
+$conn->close();
 ?>
 
 <!DOCTYPE html>

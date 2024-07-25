@@ -8,6 +8,7 @@ $username = $_SESSION['username'];
 $tableName = "{$username}_events";
 $sql = "SELECT * FROM $tableName";
 $result = $conn->query($sql);
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +50,3 @@ $result = $conn->query($sql);
     <button onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
 </body>
 </html>
-
-<?php
-$conn->close();
-?>
