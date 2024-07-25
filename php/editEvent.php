@@ -16,19 +16,11 @@ $events = [];
 $fetchEventsSQL = "SELECT eventName FROM `${username}_events`";
 $result = $conn->query($fetchEventsSQL);
 
-if ($result) {
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $events[] = $row['eventName'];
-        }
-    } else {
-        echo "No events found.";
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $events[] = $row['eventName'];
     }
-} else {
-    echo "Error: " . $conn->error;
 }
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -38,20 +30,47 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
     <link rel="stylesheet" href="../css/style.css?v=0.1">
+    <style>
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f6f6f6;
+            min-width: 230px;
+            border: 1px solid #ddd;
+            z-index: 1;
+        }
+
+        .dropdown-content div {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content div:hover {
+            background-color: #ddd;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <h1>Edit Event</h1>
-    <div id="selectEvent">
-        <h3>Select Event</h3>
-        <select name="eventSelect" id="eventSelect" required>
-            <option value="" disabled selected>Select Event</option>
+    <div class="dropdown">
+        <input type="text" placeholder="Search events..." id="myInput" onkeyup="filterFunction()">
+        <div id="myDropdown" class="dropdown-content">
             <?php foreach ($events as $event): ?>
-                <option value="<?php echo htmlspecialchars($event); ?>"><?php echo htmlspecialchars($event); ?></option>
+                <div onclick="selectEvent('<?php echo htmlspecialchars($event); ?>')">
+                    <?php echo htmlspecialchars($event); ?>
+                </div>
             <?php endforeach; ?>
-        </select>
+        </div>
     </div>  
     <script src="../js/editEvent.js"></script>
 </body>
 </html>
+
 
 
