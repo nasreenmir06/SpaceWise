@@ -29,7 +29,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['building_name'])) {
         echo "<script>alert('Error adding building: " . $conn->error . "');</script>";
     }
 }
-$conn->close();
 ?>
 
 <!DOCTYPE html>

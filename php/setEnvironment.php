@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['space_name'])) {
         echo "<script>alert('Error updating environment name: " . $conn->error . "');</script>";
     }
 }
-$conn->close();
+
 ?>
 
 <!DOCTYPE html>
