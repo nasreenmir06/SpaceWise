@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
-    <link rel="stylesheet" href="../css/style.css?v=0.1">
+    <link rel="stylesheet" href="../css/style.css?v=0.0">
     <style>
         .dropdown-content {
             display: none;
@@ -167,6 +167,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
             <option value="" disabled selected>Select Room</option>
         </select>
     </div>  
+    <div id="updateEvent" style="display:none;">
+        <button type="submit" id="updateEventButton">Update Event</button>
+    </div>
     <script src="../js/editEvent.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@ function filterFunction() {
 }
 
 function fetchRooms(buildingName, roomInput) {
-    fetch('editEvent.php', {
+    return fetch('editEvent.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +38,6 @@ function fetchRooms(buildingName, roomInput) {
             roomInput.appendChild(option);
         });
         roomInput.style.display = 'block';
-
     })
     .catch(error => console.error('Error fetching rooms:', error));
 }
@@ -51,16 +50,14 @@ function defaultValues(eventDetails) {
 
     const elementsToDisplay = [
         'setEventName', 'startDateDiv', 'endDateDiv', 'startTime', 
-        'endTime', 'selectBuilding', 'selectRoom'
+        'endTime', 'selectBuilding', 'selectRoom', 'updateEvent'
     ];
     elementsToDisplay.forEach(id => {
         const element = document.getElementById(id);
         element.style.display = 'block';
     });
-    console.log(eventDetails);
     
     //fill in default values
-    // start time, end time, building, and room need proper selections
     const startHour = eventDetails.startTime.substring(0, 2);
     const startMin = eventDetails.startTime.substring(3, 5);
     const startMer = eventDetails.startTime.substring(6, 8);
@@ -68,9 +65,6 @@ function defaultValues(eventDetails) {
     const endMin = eventDetails.endTime.substring(3, 5);
     const endMer = eventDetails.endTime.substring(6, 8);
 
-    console.log(eventDetails.building);
-
-    const roomSelect = document.getElementById('roomSelect');
     document.getElementById('eventName').value = eventDetails.eventName;
     document.getElementById('startDate').value = eventDetails.startDate;
     document.getElementById('endDate').value = eventDetails.endDate;
@@ -81,10 +75,12 @@ function defaultValues(eventDetails) {
     document.getElementById('endMin').value = endMin;
     document.getElementById('endMeridiem').value = endMer;
     document.getElementById('buildingSelect').value = eventDetails.building;
-    fetchRooms(eventDetails.building, roomSelect);
-    document.getElementById('roomSelect').value = eventDetails.room;
 
-    //update function gets values and updates event table upon Update Event button click
+    const roomSelect = document.getElementById('roomSelect');
+    fetchRooms(eventDetails.building, roomSelect)
+        .then(() => {
+            roomSelect.value = eventDetails.room;
+        });
 }
 
 function selectEvent(value) {
@@ -92,7 +88,6 @@ function selectEvent(value) {
     input.value = value;
     document.getElementById('myDropdown').classList.remove('show');
     eventNameSearch = document.getElementById('myInput').value;
-    console.log("event name" + eventNameSearch);
     fetch(`editEvent.php?eventName=${encodeURIComponent(eventNameSearch)}`)
         .then(response => response.json())
         .then(eventDetails => {
@@ -103,6 +98,16 @@ function selectEvent(value) {
             }
         })
         .catch(error => console.error('Error fetching event details:', error));
+}
+
+function populateDropdown(elementId, start, end) {
+    const dropdown = document.getElementById(elementId);
+    for (let i = start; i <= end; i++) {
+        const option = document.createElement('option');
+        option.value = i < 10 ? '0' + i : i;
+        option.textContent = i < 10 ? '0' + i : i;
+        dropdown.appendChild(option);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -125,14 +130,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-function populateDropdown(elementId, start, end) {
-    const dropdown = document.getElementById(elementId);
-    for (let i = start; i <= end; i++) {
-        const option = document.createElement('option');
-        option.value = i < 10 ? '0' + i : i;
-        option.textContent = i < 10 ? '0' + i : i;
-        console.log(option)
-        dropdown.appendChild(option);
-    }
-}
+//update function gets values and updates event table upon Update Event button click
+document.getElementById('updateEventButton').addEventListener('click', function(event) {
+    console.log("yes");
+});
+
 

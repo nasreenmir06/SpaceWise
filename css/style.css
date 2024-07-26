@@ -111,3 +111,11 @@ body #editSpaceElems > input {
     margin-top: 20px; /* Adjust this value as needed */
     gap: 10px;
 }
+
+body #editSpaceForm #editSpaceSubmit {
+    margin-top: 10px;
+}
+
+body #updateEvent #updateEventButton {
+    margin-top: 10px;
+}

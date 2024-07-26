@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" id="roomName" placeholder="What is the name of this new room?">
             </div>
         </div>
-        <button type="submit">Submit</button>
+        <button id="editSpaceSubmit" type="submit">Submit</button>
     </form>
     <script src="../js/editSpace.js"></script>
 </body>
