@@ -81,11 +81,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <h1>Add Event</h1>
     <p>If this event is a one day event, your start date and end date should be the same.</p>
+    <div id="setEventName">
+        <h3>Set Event Name</h3>
+        <input type="text" id="eventName" placeholder="Enter event name">
+    </div>
     <div id="startDateDiv">
         <h3>Select Start Date</h3>
         <input type="date" id="startDate" name="startDate" />
     </div>
-
     <div id="endDateDiv">
         <h3>Select End Date</h3>
         <input type="date" id="endDate" name="endDate" />
@@ -105,7 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="pm">PM</option>
         </select>
     </div>
-
     <div id="endTime">
         <h3>Select End Time</h3>
         <select name="endHour" id="endHour" required>
@@ -130,18 +132,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endforeach; ?>
         </select>
     </div>  
-
     <div id="selectRoom" style="display:none;">
         <h3>Select Room</h3>
         <select name="roomSelect" id="roomSelect" required>
             <option value="" disabled selected>Select Room</option>
         </select>
     </div>  
-
-    <div id="setEventName" style="display:none;">
-        <h3>Set Event Name</h3>
-        <input type="text" id="eventName" placeholder="Enter event name">
-    </div>
 
     <div id="createEvent" style="display:none;">
         <button onclick="window.location.href='addEvent.php'" type="submit" id="createEventButton">Create Event!</button>

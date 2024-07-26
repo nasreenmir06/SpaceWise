@@ -4,12 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
     populateDropdown('startMin', 0, 59);
     populateDropdown('endMin', 0, 59);
 
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0');
-    const day = String(today.getDate()).padStart(2, '0');
-    const formattedDate = `${year}-${month}-${day}`;
-
     const startDateInput = document.getElementById('startDate');
     startDateInput.setAttribute('min', formattedDate);
     startDateInput.setAttribute('value', formattedDate);
@@ -21,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const buildingSelectElement = document.getElementById('buildingSelect');
     const roomSelectElement = document.getElementById('roomSelect');
     const selectRoomDiv = document.getElementById('selectRoom');
-    const setEventNameDiv = document.getElementById('setEventName');
     const createEventDiv = document.getElementById('createEvent');
 
     buildingSelectElement.addEventListener('change', function(event) {
@@ -47,7 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 roomSelectElement.appendChild(option);
             });
             selectRoomDiv.style.display = 'block';
-            setEventNameDiv.style.display = 'block';
             createEventDiv.style.display = 'block';
 
         })
