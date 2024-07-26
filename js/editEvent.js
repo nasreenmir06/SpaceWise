@@ -20,6 +20,29 @@ function filterFunction() {
     }
 }
 
+function fetchRooms(buildingName, roomInput) {
+    fetch('editEvent.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 'building_name=' + encodeURIComponent(buildingName)
+    })
+    .then(response => response.json())
+    .then(data => {
+        roomInput.innerHTML = '<option value="" disabled selected>Select Room</option>';
+        data.forEach(room => {
+            const option = document.createElement('option');
+            option.value = room;
+            option.textContent = room;
+            roomInput.appendChild(option);
+        });
+        roomInput.style.display = 'block';
+
+    })
+    .catch(error => console.error('Error fetching rooms:', error));
+}
+
 function defaultValues(eventDetails) {
     populateDropdown('startHour', 1, 12);
     populateDropdown('endHour', 1, 12);
@@ -35,6 +58,7 @@ function defaultValues(eventDetails) {
         element.style.display = 'block';
     });
     console.log(eventDetails);
+    
     //fill in default values
     // start time, end time, building, and room need proper selections
     const startHour = eventDetails.startTime.substring(0, 2);
@@ -46,6 +70,7 @@ function defaultValues(eventDetails) {
 
     console.log(eventDetails.building);
 
+    const roomSelect = document.getElementById('roomSelect');
     document.getElementById('eventName').value = eventDetails.eventName;
     document.getElementById('startDate').value = eventDetails.startDate;
     document.getElementById('endDate').value = eventDetails.endDate;
@@ -56,6 +81,7 @@ function defaultValues(eventDetails) {
     document.getElementById('endMin').value = endMin;
     document.getElementById('endMeridiem').value = endMer;
     document.getElementById('buildingSelect').value = eventDetails.building;
+    fetchRooms(eventDetails.building, roomSelect);
     document.getElementById('roomSelect').value = eventDetails.room;
 
     //update function gets values and updates event table upon Update Event button click

@@ -47,6 +47,23 @@ if (isset($_GET['eventName'])) {
     }
     exit();
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
+    $building_name = $conn->real_escape_string($_POST['building_name']);
+    $building_table = "${username}_{$space_name}_{$building_name}";
+    $rooms = [];
+
+    $fetchRoomsSQL = "SELECT rooms FROM `$building_table`";
+    $result = $conn->query($fetchRoomsSQL);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $rooms[] = $row['rooms'];
+        }
+    }
+
+    echo json_encode($rooms);
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +161,7 @@ if (isset($_GET['eventName'])) {
             <?php endforeach; ?>
         </select>
     </div>  
-    <div id="selectRoom" style="display:none;" style="display:none;">
+    <div id="selectRoom" style="display:none;">
         <h3>Select Room</h3>
         <select name="roomSelect" id="roomSelect" required>
             <option value="" disabled selected>Select Room</option>
