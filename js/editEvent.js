@@ -133,6 +133,34 @@ document.addEventListener('DOMContentLoaded', function() {
 //update function gets values and updates event table upon Update Event button click
 document.getElementById('updateEventButton').addEventListener('click', function(event) {
     console.log("yes");
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const startHour = document.getElementById('startHour').value;
+    const startMin = document.getElementById('startMin').value;
+    const startMeridiem = document.getElementById('startMeridiem').value;
+    const endHour = document.getElementById('endHour').value;
+    const endMin = document.getElementById('endMin').value;
+    const endMeridiem = document.getElementById('endMeridiem').value;
+    const building = document.getElementById('buildingSelect').value;
+    const room = document.getElementById('roomSelect').value;
+    const eventName = document.getElementById('eventName').value;
+    const origEventName = document.getElementById('myInput').value;
+
+    const eventData = {
+        startDate,
+        endDate,
+        startHour,
+        startMin,
+        startMeridiem,
+        endHour,
+        endMin,
+        endMeridiem,
+        building,
+        room,
+        eventName,
+        origEventName
+    };
+
 });
 
 

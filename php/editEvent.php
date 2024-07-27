@@ -64,6 +64,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['building_name'])) {
     echo json_encode($rooms);
     exit();
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    if ($data) {
+        $eventName = $conn->real_escape_string($data['eventName']);
+        $building = $conn->real_escape_string($data['building']);
+        $room = $conn->real_escape_string($data['room']);
+        $startDate = $conn->real_escape_string($data['startDate']);
+        $endDate = $conn->real_escape_string($data['endDate']);
+        $startHour = $conn->real_escape_string($data['startHour']);
+        $startMin = $conn->real_escape_string($data['startMin']);
+        $startMeridiem = $conn->real_escape_string($data['startMeridiem']);
+        $endHour = $conn->real_escape_string($data['endHour']);
+        $endMin = $conn->real_escape_string($data['endMin']);
+        $endMeridiem = $conn->real_escape_string($data['endMeridiem']);
+        $origEventName = $conn->real_escape_string($data['origEventName']);
+
+        $sql = "UPDATE `${username}_events` 
+        SET eventName = $eventName,
+            building = '$building', 
+            room = '$room', 
+            startDate = '$startDate', 
+            endDate = '$endDate', 
+            startTime = '$startHour:$startMin $startMeridiem', 
+            endTime = '$endHour:$endMin $endMeridiem' 
+        WHERE eventName = '$origEventName'";
+
+
+        if ($conn->query($sql) === TRUE) {
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => $conn->error]);
+        }
+    } else {
+        echo json_encode(['status' => 'error', 'message' => 'Invalid input']);
+    }
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
