@@ -142,6 +142,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div id="createEvent" style="display:none;">
         <button onclick="window.location.href='addEvent.php'" type="submit" id="createEventButton">Create Event!</button>
     </div>
+    <div id="backToDashboardDiv">
+        <button id="backToDashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
+    </div>
     <script src="../js/addEvent.js"></script>
 </body>
 </html>

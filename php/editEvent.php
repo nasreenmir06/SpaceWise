@@ -102,7 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -183,6 +182,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>  
     <div id="updateEvent" style="display:none;">
         <button type="submit" id="updateEventButton">Update Event</button>
+    </div>
+    <div id="backToDashboardDiv">
+        <button id="backToDashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
     </div>
     <script src="../js/editEvent.js"></script>
 </body>

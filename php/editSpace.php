@@ -168,6 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <button id="editSpaceSubmit" type="submit">Submit</button>
     </form>
+    <button onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
     <script src="../js/editSpace.js"></script>
 </body>
 </html>
