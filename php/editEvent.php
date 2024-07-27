@@ -111,32 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Event</title>
-    <link rel="stylesheet" href="../css/style.css?v=0.0">
-    <style>
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f6f6f6;
-            min-width: 230px;
-            border: 1px solid #ddd;
-            z-index: 1;
-        }
-
-        .dropdown-content div {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content div:hover {
-            background-color: #ddd;
-        }
-
-        .show {
-            display: block;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/style.css?v=0.1">
 </head>
 <body>
     <h1>Edit Event</h1>
