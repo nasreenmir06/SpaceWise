@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.text())
         .then(data => {
             console.log(data);
-            alert(data);
         })
         .catch(error => console.error('Error:', error));
     });

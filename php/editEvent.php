@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
     </div>  
     <div id="updateEvent" style="display:none;">
-        <button type="submit" id="updateEventButton">Update Event</button>
+        <button onclick="window.location.href='editEvent.php'" type="submit" id="updateEventButton">Update Event</button>
     </div>
     <div id="backToDashboardDiv">
         <button id="backToDashboard" onclick="window.location.href='dashboard.php'">Back to Dashboard</button>
