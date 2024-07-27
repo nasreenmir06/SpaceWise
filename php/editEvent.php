@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $origEventName = $conn->real_escape_string($data['origEventName']);
 
         $sql = "UPDATE `${username}_events` 
-        SET eventName = $eventName,
+        SET eventName = '$eventName',
             building = '$building', 
             room = '$room', 
             startDate = '$startDate', 
@@ -91,7 +91,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             startTime = '$startHour:$startMin $startMeridiem', 
             endTime = '$endHour:$endMin $endMeridiem' 
         WHERE eventName = '$origEventName'";
-
 
         if ($conn->query($sql) === TRUE) {
             echo json_encode(['status' => 'success']);
@@ -103,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>

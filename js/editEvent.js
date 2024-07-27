@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //update function gets values and updates event table upon Update Event button click
-document.getElementById('updateEventButton').addEventListener('click', function(event) {
+document.getElementById('updateEventButton').addEventListener('click', function() {
     console.log("yes");
     const startDate = document.getElementById('startDate').value;
     const endDate = document.getElementById('endDate').value;
@@ -161,6 +161,19 @@ document.getElementById('updateEventButton').addEventListener('click', function(
         origEventName
     };
 
+    fetch('editEvent.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch(error => console.error('Error:', error));
 });
+
 
 
