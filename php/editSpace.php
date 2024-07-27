@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } elseif ($addOrRemove === "remove" && $buildingOrRoom === "building") {
             $tableName = "{$username}_{$space_name}_{$building_name}";
-            $sql = "DROP TABLE IF EXISTS `{$tableName}`";
 
+            $sql = "DROP TABLE IF EXISTS `{$tableName}`";
             if ($conn->query($sql) === TRUE) {
                 echo "Table deleted successfully";
             } else {
@@ -89,20 +89,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $sql = "DELETE FROM `{$username}_{$space_name}` WHERE `buildings` = '$building_name'";
-    
             if ($conn->query($sql) === TRUE) {
                 echo "Building deleted successfully";
             } else {
                 echo "Error deleting building: " . $conn->error;
-            }            
+            }     
+            
+            $sql = "DELETE FROM `{$username}_events` WHERE `building` = '$building_name'";
+            if ($conn->query($sql) === TRUE) {
+                echo "Events in building deleted successfully\n";
+            } else {
+                echo "Error deleting events in building: " . $conn->error . "\n";
+            }
         } elseif ($addOrRemove === "remove" && $buildingOrRoom === "room") {
             $sql = "DELETE FROM `{$username}_{$space_name}_{$building_name}` WHERE `rooms` = '$room_name'";
-    
             if ($conn->query($sql) === TRUE) {
                 echo "Room deleted successfully";
             } else {
                 echo "Error deleting room: " . $conn->error;
-            }         
+            }  
+            
+            $sql = "DELETE FROM `{$username}_events` WHERE `room` = '$room_name'";
+            if ($conn->query($sql) === TRUE) {
+                echo "Events in room deleted successfully\n";
+            } else {
+                echo "Error deleting events in room: " . $conn->error . "\n";
+            }
         }
     } elseif (isset($_POST['BuildingOrRoom'])) {
         $buildingOrRoom = $_POST['BuildingOrRoom'];
