@@ -1,7 +1,7 @@
 # SpaceWise
 
 ## Purpose:
-This is a basic event management system built with PHP, Javascript, and a MySQL Database.
+This is a basic event management system built with PHP, Javascript, and a MySQL Database. This program allows you to make an account, create a "space", which is a collection of buildings and rooms, and then book events within the space. The program's functionality includes viewing all events, editing events, and editing the buildings and rooms.
 
 ## Requirements:
 - XAMPP
@@ -21,42 +21,5 @@ This is a basic event management system built with PHP, Javascript, and a MySQL 
 
 ## Demo
 
-<div style="max-width:600px; margin:auto;">
-  <div style="display:none;">
-    <img src="./images/image1.png" style="width:100%;">
-  </div>
-  <div style="display:none;">
-    <img src="./images/image2.png" style="width:100%;">
-  </div>
-  <div style="display:none;">
-    <img src="./images/image3.png" style="width:100%;">
-  </div>
-
-  <div style="text-align:center;">
-    <span onclick="currentSlide(1)" style="cursor:pointer;">&#10094;</span>
-    <span onclick="currentSlide(2)" style="cursor:pointer;">&#10095;</span>
-  </div>
-</div>
-
-<script>
-  var slideIndex = 0;
-  showSlides();
-
-  function showSlides() {
-    var i;
-    var slides = document.querySelectorAll("div > div");
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
-    setTimeout(showSlides, 3000);
-  }
-
-  function currentSlide(n) {
-    slideIndex = n-1;
-    showSlides();
-  }
-</script>
+https://docs.google.com/presentation/d/1Gy1XKrg2lstYvh1ZwY18sXwHfM_lBpy05RQduuqN3fs/edit?usp=sharing
 
