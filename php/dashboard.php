@@ -47,7 +47,6 @@ $conn->close();
 
             <button onclick="window.location.href='editSpace.php'">Edit Space Setup</button>
         </div>
-        <h3>Upcoming events in <?php echo htmlspecialchars($environmentName); ?></h3>
     <?php endif; ?>
     <script>
         document.getElementById('search-form').addEventListener('submit', function(event) {
