@@ -7,10 +7,6 @@ This is a basic event management system built with PHP, Javascript, and a MySQL 
 - XAMPP
 
 ## Things to Improve:
-- color differentiation
-- user should be able to download their chart
-- better GPT suggestions
-
 - Improve the front end design of the site
 - Users being able to add multiple events and have AI determine where they should go to avoid conflicts
 - After adding a building or room, remove window pop-up message and instead display a table and update it every time something is added
