@@ -19,3 +19,5 @@ This is a basic event management system built with PHP, Javascript, and a MySQL 
 
 https://docs.google.com/presentation/d/1Gy1XKrg2lstYvh1ZwY18sXwHfM_lBpy05RQduuqN3fs/edit?usp=sharing
 
+I also wrote a Medium article about how I built SpaceWise. Read it here: https://medium.com/@nasreenmir06/how-i-built-spacewise-an-event-management-system-6195dab71fa1
+
